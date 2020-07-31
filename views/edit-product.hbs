@@ -1,0 +1,69 @@
+<div class="card">
+    <div class="card-header clearfix">
+        <h2 class="h3 float-left">Edit Product</h2>
+        <div class="float-right">
+            <a href="/" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <form id="editArticle" class="card-body" method="post" action="/edit-product">
+            <!--<div id="formMsg" class="alert alert-danger text-center">Your form has errors</div> -->
+
+            <div class="row">
+                    <div class="form-group col-md-6">
+                      <img src={{ product.imagePath }} alt="" width="70" class="img-fluid rounded shadow-sm">
+                        <div class="ml-3 d-inline-block align-middle">
+                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">{{ product.title }}
+                           {{#if product.iszirconia}} {{ product.size }}mm  {{ product.color }} {{/if}} </a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: {{ product.category }}</span>
+                        </div>
+                     <div class="form-group col-md-6">
+                    <label for="title">Title: {{product.title}}</label>
+                    <input type="text" id="title" name="title" class="form-control" value="" >
+                </div>
+            </div>
+                
+            <div class="form-group col-md">
+                    <label for="body">Description: {{product.description}}</label>
+                    <textarea id="body" name="description" class="form-control" rows="2" ></textarea>
+                  </div>
+            </div>
+  
+                <div class="row">
+                  <div class="form-group col-md">
+                    <label for="body">Size: {{product.size}}</label>
+                    <input type="text" id="size" name="size" class="form-control" ></textarea>
+                  </div>
+                  <div class="form-group col-md">
+                    <label class"radio-inline" for="body">Display show current: {{product.storedisplay}}</label>
+                    <div>
+                        <label class="radio-inline" for="storedisplay">true
+                            <input type="radio" id="female" name="storedisplay" value="true">
+                        </label>
+                        <label class="radio-inline" for="storedisplay">false
+                            <input type="radio" id="female" name="storedisplay" value="false">
+                        </label>
+                    </div>
+                  </div>
+                </div>
+  
+                  <div class="form-group col-md-6">
+                    <label for="Price">Current Price: {{product.price}} write one price for each line</label>
+                        {{#each product.size}}
+                        <input type="number" id="price" name="price[]" class="form-control" value="" >
+                            {{else}}    
+                        <input type="number" id="price" name="price[]" class="form-control" value="" >
+                        {{/each}}
+                 </div>
+                </div>
+                <div>
+                    <label for="Price">ProducID: {{product.id}}</label>
+                  <input type="hidden" id="_id" name="_id" class="form-control" value={{product.id}} required>
+                </div>
+                
+  
+                <div class="text-right">
+                  <input type="submit" value="Submit" class="btn btn-lg btn-primary btn-sm-block">
+                 <!-- <a href="/edit-product/{{product.id}}"  class="btn btn-success mt-auto float-ris.s.ght" role="button">Save</a> -->
+                </div>
+              </form>
+            </div>

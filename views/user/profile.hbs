@@ -1,0 +1,58 @@
+<div class="row">
+   <div class="col-md-8 col-md-offset-2">
+        <h1>User Profile  <span style="float:right; padding: 10px;font-size:x-large"> {{session.req.user.email}}</span></h1>
+         {{!-- <h1>User Profile  <span class="pull-right">{{session.req.user.email}}</span></h1> --}}
+       <hr>
+       <h2 class="text-center">My orders</h2>
+       {{# each orders}}
+        <div class="panel panel-default">
+           <div class="panel-body">
+                <ul class="list-group">
+                  {{#each this.items }}
+                  <li class ="list-group-item">
+                  <p></p>
+                   <span class=""badge">{{this.price}}</span>
+                    {{ this.item.title }} {{#if this.item.iszirconia}} {{this.item.size}}mm {{this.item.color}} {{/if}}
+                    | {{ this.qty }} Units
+                  </li>
+                  {{/each}}
+                </ul>
+           </div>
+           <div hidden id="sourcedate{{@index}}"> {{this.orderdate}} </div> 
+           {{!-- <div hidden id="sourcedate"> {{this.orderdate}} </div> --}}
+
+           <div class="panel-footer text-center">Order Total:$ {{this.cart.totalPrice}} Order Date: <span id="datetime"></span></div>
+        </div>
+        <br>
+       {{/each}}  
+   </div>
+</div>
+<script>
+  $("[id^=sourcedate]").each(function(index) {
+    var orderdate = $(this).text();
+    var dt = new Date(orderdate);
+    {{!-- alert(getFormattedDate(dt)); --}}
+    {{!-- $(this).next(".panel-footer text-center").find("[id^=datetime]").text((getFormattedDate(dt))); --}}
+    $("[id^=datetime]").eq(index).text((getFormattedDate(dt))); 
+  });
+  function getFormattedDate(date) {
+      let year = date.getFullYear();
+      let month = (1 + date.getMonth()).toString().padStart(2, '0');
+      let day = date.getDate().toString().padStart(2, '0');
+    
+      return month + '/' + day + '/' + year;
+  }
+
+
+  {{!-- var orderdate = document.getElementById("sourcedate");
+  var dt = new Date(orderdate.innerHTML);
+  document.getElementById("datetime").innerHTML = getFormattedDate(dt);
+  function getFormattedDate(date) {
+      let year = date.getFullYear();
+      let month = (1 + date.getMonth()).toString().padStart(2, '0');
+      let day = date.getDate().toString().padStart(2, '0');
+    
+      return month + '/' + day + '/' + year;
+  }  --}}
+</script>
+

@@ -1,0 +1,73 @@
+{{!-- <div class="card login-form">
+        <form id="registrationForm" class="card-body" action="" method="post">
+                <h1 class="card-title text-center">Create an Account</h1>
+                {{#if hasErrors}}
+                    <div class="alert alert-danger"
+                    {{# each messages }}
+                        <p>{{this}}</p>
+                        {{/each}}
+                    </div>
+                {{/if}}        
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Confirm Password</label>
+                  <input type="password" id="password" name="password1" class="form-control" required>
+                </div>
+                <!--<div class="form-group">
+                  <label for="confirm_password">Confirm Password</label>
+                  <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                </div> -->
+                <div>
+                  <!--<input type="submit" value="Sign In" class="btn btn-lg btn-primary btn-block">-->
+                  <input type = "hidden" name="_csrf" value="{{ csrfToken }}">
+                  <button class="btn btn-primary btn-block"  type="submit">Sign Up</button>       
+                </div>
+        </form>
+</div> --}}
+
+<div class ="container form">
+
+  <div class="jumbotron form"><h2><i class="fa fa-user-plus" aria-hidden="true"></i> Signup</h2>
+    {{#if hasErrors}}
+        <div class="alert alert-danger"
+            {{# each messages }}
+                <p>{{this}}</p>
+            {{/each}}
+        </div>
+    {{/if}}        
+  </div>
+  
+  <form action = "" method="POST">
+      <div class="form-group">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder = "Enter email" > 
+      </div>
+      <div class="form-group">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <label for="password">Password</label>
+          <input type = "password" class ="form-control" placeholder = "Enter password" name="password">
+      </div>
+      <div class="form-group">
+          <i class="fa fa-key" aria-hidden="true"></i>
+          <label for="password">Confirm password</label>
+              <input type = "password" class ="form-control" placeholder = "Enter password" name = "password1">
+      </div>
+      {{!-- <div class="form-group">
+      <i class="fa fa-picture-o" aria-hidden="true"></i>
+          <label for="img">Image</label>
+              <input type = "text" class ="form-control" placeholder = "Enter image URL" name = "image">
+      </div> --}}
+      <div>
+        <input type = "hidden" name="_csrf" value="{{ csrfToken }}">
+        <button type ="submit" class="btn btn-primary btn-lg">Signup</button>
+      </div>
+  </form>
+</div>

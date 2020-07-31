@@ -1,0 +1,32 @@
+.card-img-top {
+    width: 100%;
+    height: auto; 
+    object-fit: cover;
+}
+
+.card .card-block {max-height:300px;overflow:auto;}
+
+.img-thumbnail img {
+    max-height: 150px;
+    width: 100%;
+    margin: 16px 40px !important;
+}
+
+.card:hover{
+    -webkit-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 9px 40px -12px  rgba(0,0,0,0.75);
+    box-shadow: -1px 9px 40px -12px  rgba(0,0,0,0.75);
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+.img-thumbnail .description {
+    color: #7f7f7f;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 16px;
+}
+
