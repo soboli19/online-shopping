@@ -11,6 +11,7 @@
               <tr>
                 <td>Name</td>
                 <td>Email</td>
+                <td>Created</td>
                 <td>Active</td>
                 <td>Admin</td>
               </tr>
@@ -19,7 +20,8 @@
                 {{#each users}}
                 <tr>
                     <td>{{ this.name }}</td>
-                    <td>{{ this.email }}</td>
+                    <td><a href="/edit-user/{{ this._id }}">{{ this.email}}</a> </td>
+                    <td>{{ this.created }}</td>
                     <td>{{ this.active }}</td>
                     <td>{{ this.admin }}</td>
                 </tr>

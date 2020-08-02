@@ -314,6 +314,7 @@ router.get('/misc', function(req, res, next) {
 });
 
 router.get('/3D', function(req, res, next) {
+    var successMsg = req.flash('success')[0];
     Product.find({category: "3D"},function(err, docs){
       var userAdmin = null;
     if (req.isAuthenticated() && (req.user.admin == 1)) {
@@ -513,9 +514,12 @@ router.post('/edit-user',  function (req, res) {
     // };
 
     if(req.body.name){
-      producuser.name = req.body.name;
+      user.name = req.body.name;
     };
 
+    if(req.body.phone){
+      user.phone = req.body.phone;
+    };
     if(req.body.active){
     user.active = req.body.active;
     };
@@ -524,7 +528,7 @@ router.post('/edit-user',  function (req, res) {
       user.admin = req.body.admin;
     };
 
-    user.save().then(function(err){
+    user.save().then(function(err, user){
       if(err){
         return res.json({success: false, error: err});
       }else{
@@ -533,7 +537,7 @@ router.post('/edit-user',  function (req, res) {
     });
   });
   }
-  else { console.log('Edit: user is NOT admin');
+  else { alert('Edit: user is NOT admin');
   return res.redirect("/");}
 });
 
