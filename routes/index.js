@@ -500,12 +500,12 @@ router.post('/edit-user',  function (req, res) {
   var userAdmin = null;
   if (req.isAuthenticated() && (req.user.admin == 1)) {
       userAdmin = true;
-      console.log( 'user is Admin =',  userAdmin);
-      successMsg = 'user is Admin';
+      //console.log( 'user is Admin =',  userAdmin);
+      //successMsg = 'user is Admin';
     
     
     User.findOne({'_id': req.body._id},function(err, user){ 
-    console.log(user) 
+    //console.log(user) 
     if(err) {
       return res.json({success: false, error: err});
     }
@@ -528,11 +528,16 @@ router.post('/edit-user',  function (req, res) {
       user.admin = req.body.admin;
     };
 
-    user.save().then(function(err, user){
+    //user.save().then(function(err, user){
+      user.save(function(err, user){
       if(err){
+        //console.error(err.stack)
+        console.log(JSON.stringify(err))
         return res.json({success: false, error: err});
       }else{
-        return res.json({success: true, user: user});
+        req.flash('success', 'Successfully edited user!');
+        //return res.json({success: true, user: user});
+        return res.redirect("/");
       }
     });
   });
@@ -620,11 +625,13 @@ router.post('/edit-product',  function (req, res) {
       product.storedisplay = req.body.storedisplay;
     };
 
-    product.save().then(function(err){
+    //product.save().then(function(err){
+      product.save(function(err){
       if(err){
         return res.json({success: false, error: err});
       }else{
-        return res.json({success: true, product:product});
+        //return res.json({success: true, product:product});
+        return res.redirect("/");
       }
     });
   });
