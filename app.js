@@ -23,7 +23,13 @@ var app = express();
 
 var config = require('./config.dev');
 
-mongoose.connect(config.mongodb, {useUnifiedTopology: true, useNewUrlParser: true });
+//mongoose.connect(config.mongodb, {useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect(config.mongodb, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },function(err){
+  var admin = new mongoose.mongo.Admin(mongoose.connection.db);
+  admin.buildInfo(function (err, info) {
+   console.log("connection succesfull MongoDB version",info.version);
+  });
+});
 require('./config/passport');
 
 //mongoose.connect('localhost:27017/shopping');
