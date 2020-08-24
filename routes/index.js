@@ -161,8 +161,9 @@ router.get('/HT-mono-shaded', function(req, res, next) {
   });
 });
 
-router.get('/Ivoclar', function(req, res, next) {
+router.get('/filter/:brand', function(req, res, next) {
   var successMsg = req.flash('success')[0];
+  var zirconiaBrand = req.params.brand;
   Product.find(function(err, docs){
     var userAdmin = null;
     if (req.isAuthenticated() && (req.user.admin == 1)) {
@@ -174,99 +175,7 @@ router.get('/Ivoclar', function(req, res, next) {
     var  productChunks= [];
     var chunkSize = 3;
     for (var i = 0; i < docs.length; i ++ ) {
-        if (docs[i].category == 'Ivoclar') {
-        productselect.push(docs[i]); }
-        }
-    for (var j = 0; j < docs.length; j += chunkSize) {
-        productChunks.push(productselect.slice(j, j + chunkSize));
-    }
-    res.render('shop/index', { title: 'Shopping Cart', products: productChunks, successMsg: successMsg, noMessages: !successMsg, userAdmin: userAdmin });
-  });
-});
-
-router.get('/Argen', function(req, res, next) {
-  var successMsg = req.flash('success')[0];
-  Product.find(function(err, docs){
-    var userAdmin = null;
-    if (req.isAuthenticated() && (req.user.admin == 1)) {
-      userAdmin = true;
-      console.log( 'user is Admin =',  userAdmin);
-      successMsg = 'user is Admin';
-    }
-    var productselect= [];
-    var  productChunks= [];
-    var chunkSize = 3;
-    for (var i = 0; i < docs.length; i ++ ) {
-        if (docs[i].category == 'Argen') {
-        productselect.push(docs[i]); }
-        }
-    for (var j = 0; j < docs.length; j += chunkSize) {
-        productChunks.push(productselect.slice(j, j + chunkSize));
-    }
-    res.render('shop/index', { title: 'Shopping Cart', products: productChunks, successMsg: successMsg, noMessages: !successMsg, userAdmin: userAdmin });
-  });
-});
-
-router.get('/Sagemax', function(req, res, next) {
-  var successMsg = req.flash('success')[0];
-  Product.find(function(err, docs){
-    var userAdmin = null;
-    if (req.isAuthenticated() && (req.user.admin == 1)) {
-      userAdmin = true;
-      console.log( 'user is Admin =',  userAdmin);
-      successMsg = 'user is Admin';
-    }
-    var productselect= [];
-    var  productChunks= [];
-    var chunkSize = 3;
-    for (var i = 0; i < docs.length; i ++ ) {
-        if (docs[i].category == 'Sagemax') {
-        productselect.push(docs[i]); }
-        }
-    for (var j = 0; j < docs.length; j += chunkSize) {
-        productChunks.push(productselect.slice(j, j + chunkSize));
-    }
-    res.render('shop/index', { title: 'Shopping Cart', products: productChunks, successMsg: successMsg, noMessages: !successMsg, userAdmin: userAdmin });
-  });
-});
-
-router.get('/Katana', function(req, res, next) {
-  var successMsg = req.flash('success')[0];
-  Product.find(function(err, docs){
-    var userAdmin = null;
-    if (req.isAuthenticated() && (req.user.admin == 1)) {
-      userAdmin = true;
-      console.log( 'user is Admin =',  userAdmin);
-      successMsg = 'user is Admin';
-    }
-    var productselect= [];
-    var  productChunks= [];
-    var chunkSize = 3;
-    for (var i = 0; i < docs.length; i ++ ) {
-        if (docs[i].category == 'Katana') {
-        productselect.push(docs[i]); }
-        }
-    for (var j = 0; j < docs.length; j += chunkSize) {
-        productChunks.push(productselect.slice(j, j + chunkSize));
-    }
-    res.render('shop/index', { title: 'Shopping Cart', products: productChunks, successMsg: successMsg, noMessages: !successMsg, userAdmin: userAdmin });
-  });
-});
-
-router.get('/Talladium', function(req, res, next) {
-  var successMsg = req.flash('success')[0];
-  Product.find(function(err, docs){
-    var userAdmin = null;
-    if (req.isAuthenticated() && (req.user.admin == 1)) {
-      userAdmin = true;
-      console.log( 'user is Admin =',  userAdmin);
-      successMsg = 'user is Admin';
-    }
-    var productselect= [];
-    var  productChunks= [];
-    var chunkSize = 3;
-    for (var i = 0; i < docs.length; i ++ ) {
-        if (docs[i].category == 'Talladium') {
+        if (docs[i].category == zirconiaBrand) {
         productselect.push(docs[i]); }
         }
     for (var j = 0; j < docs.length; j += chunkSize) {
@@ -310,7 +219,19 @@ router.get('/search', function(req, res, next) {
 });
 
 router.get('/misc', function(req, res, next) {
-    return res.render('misc/misc',{ title: 'Shopping Cart'});
+  Product.find({category1 : "17"}, function(err, docs){
+        var productselect = [];
+        var  productChunks= [];
+        var chunkSize = 3;
+        for (var i = 0; i < docs.length; i ++ ) {
+          productselect.push(docs[i]); }
+        for (var j = 0; j < docs.length; j += chunkSize) {
+          productChunks.push(productselect.slice(j, j + chunkSize)); }
+
+    //return res.render('misc/misc',{ title: 'Shopping Cart'});
+    //console.log(docs);
+    return res.render('misc/polishing',{ title: 'Zirconia polishing', products: productChunks });
+  });
 });
 
 router.get('/3D', function(req, res, next) {
